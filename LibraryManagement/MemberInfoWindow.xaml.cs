@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace LibraryManagement
+{
+    /// <summary>
+    /// Interaction logic for MemberInfoWindow.xaml
+    /// </summary>
+    public partial class MemberInfoWindow : Window
+    {
+        private LibraryMember member;
+
+        public MemberInfoWindow(LibraryMember member)
+        {
+            InitializeComponent();
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            this.member = member;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            MemberIDLabel.Content = member.ID;
+            MemberNameLabel.Content = member.Name;
+
+            MediaCurrentlyBorrowedDataGrid.ItemsSource = member.currentlyBorrowed;
+            MediaBorrowedHistoryDataGrid.ItemsSource = member.borrowHistory;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Owner.Show();
+        }
+    }
+}
